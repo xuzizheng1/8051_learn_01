@@ -92,10 +92,24 @@ void DELAY_MS (unsigned int a){
 void main (void){
 
 	PWM_init(); //PWM初始化
-	PWM0_set(0x90); //设置PWM占空比，从而控制led亮度，0x00到0xFF，最暗到最亮
+	//PWM0_set(0x90); //设置PWM占空比，从而控制led亮度，0x00到0xFF，最暗到最亮
 
 	while(1){
+		unsigned char i;
+		unsigned char dly = 7;
 		
+		for(i=0; i<0xff; i++){
+			PWM0_set(i);
+			PWM0_set(~i);
+			DELAY_MS(dly);
+		}
+			
+		for(i=0xff; i>0; i--){
+			PWM0_set(i);
+			PWM0_set(~i);
+			DELAY_MS(3);
+		}
+			
 	}
 }
 /**********************************************************************************************/
