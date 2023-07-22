@@ -6,6 +6,11 @@ sbit LED = P1 ^ 7; //定义1.7脚为 LED
 sbit LED2 = P1 ^ 6;
 sbit LED3 = P1 ^ 4;
 
+unsigned char i;
+unsigned char internal = 20;
+
+
+
 /*********************************************************************************************
 函数名：毫秒级CPU延时函数
 调  用：DELAY_MS (?);
@@ -25,10 +30,18 @@ void DELAY_MS (unsigned int a){
 
 void main (void){
 	while(1){
-		LED = 0; //led所在的LED引脚设置为低电平，将led负极接LED引脚，此时led点亮
-		DELAY_MS(1000); //sleep 1s
-		LED = 1;
-		DELAY_MS(200);
+		for(i=1; i<internal; i++){
+			LED = 0; //led所在的LED引脚设置为低电平，将led负极接LED引脚，此时led点亮
+			DELAY_MS(i);
+			LED = 1;
+			DELAY_MS(internal-i);
+		}
+		for(i=internal-1; i>0; i--){
+			LED = 0; //led所在的LED引脚设置为低电平，将led负极接LED引脚，此时led点亮
+			DELAY_MS(i);
+			LED = 1;
+			DELAY_MS(internal-i);
+		}
 	}
 }
 
