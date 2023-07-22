@@ -25,12 +25,10 @@ void DELAY_MS (unsigned int a){
 
 void main (void){
 	while(1){
-		LED = ~LED; //LED所在引脚电压取反
+		LED = 0; //led所在的LED引脚设置为低电平，将led负极接LED引脚，此时led点亮
 		DELAY_MS(1000); //sleep 1s
-		LED2 = ~LED2; //LED所在引脚电压取反
-		DELAY_MS(1000); //sleep 1s
-		LED3 = ~LED3; //LED所在引脚电压取反
-		DELAY_MS(1000); //sleep 1s
+		LED = 1;
+		DELAY_MS(200);
 	}
 }
 
