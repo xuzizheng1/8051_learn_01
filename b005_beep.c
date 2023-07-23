@@ -47,9 +47,22 @@ void main (void){
 	P17 = 1; // 蜂鸣器正极接Vcc，负极接P17
 
 	while(1){
-		DELAY_MS(2);
-		P17 = ~P17;
+		unsigned char i;
+		for(i=0; i<100; i++){
+			DELAY_MS(2);
+			P17 = ~P17;
+		}
 		
+		for(i=0; i<100; i++){
+			DELAY_MS(3);
+			P17 = ~P17;
+		}
+		
+		for(i=0; i<100; i++){
+			DELAY_MS(4);
+			P17 = ~P17;
+		}
+
 	}
 }
 
