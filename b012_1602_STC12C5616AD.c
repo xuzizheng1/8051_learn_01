@@ -163,7 +163,7 @@ void print2(uint8 a,uint8 t){
 uint8 code Xword[]={
     0x18,0x18,0x07,0x08,0x08,0x08,0x07,0x00,        //℃，代码 0x00
     0x00,0x00,0x00,0x00,0xff,0x00,0x00,0x00,        //一，代码 0x01
-    0x00,0x00,0x00,0x0e,0x00,0xff,0x00,0x00,        //二，代码 0x02
+    0x00,0x00,0x0e,0x00,0x00,0xff,0x00,0x00,        //二，代码 0x02
     0x00,0x00,0xff,0x00,0x0e,0x00,0xff,0x00,        //三，代码 0x03
     0x00,0x00,0xff,0xf5,0xfb,0xf1,0xff,0x00,        //四，代码 0x04
     0x00,0xfe,0x08,0xfe,0x0a,0x0a,0xff,0x00,        //五，代码 0x05
@@ -186,7 +186,7 @@ void LCM2402_Init(void){
   	LCM2402_WriteCMD(CMD_clear);	//  显示清屏
   	LCM2402_WriteCMD(CMD_back);		//* 数据指针指向第1行第1个字符位置
   	LCM2402_WriteCMD(CMD_add1);		//  显示光标移动设置：文字不动，光标右移
-  	LCM2402_WriteCMD(CMD_dis_gb1); 	//  显示开及光标设置：显示开，光标开，闪烁开
+  	LCM2402_WriteCMD(CMD_dis_gb3); 	//  显示开及光标设置：显示开，光标关，光标闪烁关
 	CgramWrite();					//  向CGRAM写入自定义字符
 }
 /********************************************************************************************/
@@ -234,11 +234,11 @@ void init (void){ //上电初始化
     TR0 = 1;             // 开闭定时/计数器0   
 ////
 	TIME_DD = 29; //时间在首次使用的值，之后会在EEPROM自动记录上一天的值
-	TIME_MO	= 7; //初始时间：2009年5月18日周一，20时13分40秒
+	TIME_MO	= 7; //初始时间：2023年7月29日周六，23时59分55秒
 	TIME_YY = 23;
-	TIME_WW = 1;
-	TIME_HH	= 22;
-	TIME_MM = 42;
+	TIME_WW = 6;
+	TIME_HH	= 23;
+	TIME_MM = 59;
 	TIME_SS = 55;
 }
 /********************************************************************************************
@@ -335,8 +335,13 @@ void main (void){
 	PWM0_set(22);  // 0 - 255 共256级调节背光亮度
 	LCM2402_Init();//LCM2402初始化   
 	
-	print2(0x4a, 'm');
-	print2(0x4c, 0xb5);  // 1011 0101
+	print2(0x4b, 'Z');
+	print2(0x4c, 'h');
+	print2(0x4d, 'e');
+	print2(0x4e, 'n');
+	print2(0x4f, 'g');
+	//print2(0x4a, 'm');
+	//print2(0x4c, 0xb5);  // 1011 0101
 	
 	while(1){ //主线程// 
 //		print(0x80,"DoYoung Studio"); //在第一行第一位处从左向右打印doyoung.net字符串
