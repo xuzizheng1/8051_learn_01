@@ -186,7 +186,7 @@ void LCM2402_Init(void){
   	LCM2402_WriteCMD(CMD_clear);	//  显示清屏
   	LCM2402_WriteCMD(CMD_back);		//* 数据指针指向第1行第1个字符位置
   	LCM2402_WriteCMD(CMD_add1);		//  显示光标移动设置：文字不动，光标右移
-  	LCM2402_WriteCMD(CMD_dis_gb3); 	//  显示开及光标设置：显示开，光标开，闪烁开
+  	LCM2402_WriteCMD(CMD_dis_gb1); 	//  显示开及光标设置：显示开，光标开，闪烁开
 	CgramWrite();					//  向CGRAM写入自定义字符
 }
 /********************************************************************************************/
@@ -333,9 +333,9 @@ void main (void){
 	init();//初始化
 	PWM_init();  // PWM调光设置初始化
 	PWM0_set(22);  // 0 - 255 共256级调节背光亮度
-	LCM2402_Init();//LCM2402初始化                           
+	LCM2402_Init();//LCM2402初始化   
+	RealTime_Display();    	
 	while(1){ //主线程// 
-		RealTime_Display();    	
 //		print(0x80,"DoYoung Studio"); //在第一行第一位处从左向右打印doyoung.net字符串
 //		print(0x40,"www.DoYoung.net"); //在第一行第一位处从左向右打印doyoung.net字符串
 
