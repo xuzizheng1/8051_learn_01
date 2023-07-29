@@ -233,13 +233,13 @@ void init (void){ //上电初始化
     ET0 = 1;             // 定时/计数器0允许中断   
     TR0 = 1;             // 开闭定时/计数器0   
 ////
-	TIME_DD = 6; //时间在首次使用的值，之后会在EEPROM自动记录上一天的值
+	TIME_DD = 29; //时间在首次使用的值，之后会在EEPROM自动记录上一天的值
 	TIME_MO	= 7; //初始时间：2009年5月18日周一，20时13分40秒
-	TIME_YY = 9;
+	TIME_YY = 23;
 	TIME_WW = 1;
-	TIME_HH	= 0;
-	TIME_MM = 0;
-	TIME_SS = 0;
+	TIME_HH	= 22;
+	TIME_MM = 42;
+	TIME_SS = 55;
 }
 /********************************************************************************************
 //显示项目 时间部分 在第一行全行显示时间
@@ -267,7 +267,7 @@ void RealTime_Display(void){
 		//
 	    print2(0x43,TIME_MM/10+0x30);//分钟
 	    print2(0x44,TIME_MM%10+0x30);
-		print(0x45,".");            // 显示cgram第一个字模"."
+		print(0x45,":");            // 显示cgram第一个字模"."
 		//
 	    print2(0x46,TIME_SS/10+0x30);//秒
 	    print2(0x47,TIME_SS%10+0x30);
@@ -334,11 +334,14 @@ void main (void){
 	PWM_init();  // PWM调光设置初始化
 	PWM0_set(22);  // 0 - 255 共256级调节背光亮度
 	LCM2402_Init();//LCM2402初始化   
-	RealTime_Display();    	
+	
+	print2(0x4a, 'm');
+	print2(0x4c, 0xb5);  // 1011 0101
+	
 	while(1){ //主线程// 
 //		print(0x80,"DoYoung Studio"); //在第一行第一位处从左向右打印doyoung.net字符串
 //		print(0x40,"www.DoYoung.net"); //在第一行第一位处从左向右打印doyoung.net字符串
-
+		RealTime_Display();    	
 		if(DAY_BIT == 1){ //检查天数是否更新，是则计算公历
 			month_day();//计算公历日期	
 			DAY_BIT = 0;//计算完成后将日期变更标志位置0
