@@ -5,3 +5,5 @@ a01.uvopt
 a01.uvproj
 STARTUP.A51
 .idea/
+a01*
+*.OBJ
