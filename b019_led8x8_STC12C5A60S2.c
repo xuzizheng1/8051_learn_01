@@ -77,7 +77,8 @@ unsigned char code SPEED[]={//显示“SPEED”即速度设置字样
 	0x7F,0x09,0x09,0x09,0x06,0,//P
 	0x7F,0x49,0x49,0x49,0x41,0,//E
 	0x7F,0x49,0x49,0x49,0x41,0,//E
-	0x7F,0x41,0x41,0x41,0x3E//D
+	0x7F,0x41,0x41,0x41,0x3E,0,//D
+	0x00,0x00,0x00,0x00,0x00,0
 };
 
 /*********************************************************************************************/
@@ -749,9 +750,13 @@ void init (void){ //主程序
 void main (void){ //主程序 
 	init();
 	while (1){
-		unsigned char a;
-	   		for(a=1;a<17;a++){
-				diplay_data (a,SPEED[a-1]);
+		unsigned char a,b,c;
+		for(b=0;b<22;b++){
+			for(c=0;c<20;c++){
+				for(a=1;a<17;a++){
+					diplay_data(a,SPEED[a-1+b]);
+				}
 			}
+		}
     }
 }
